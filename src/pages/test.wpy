@@ -110,9 +110,9 @@
   .toggle-all {
     position: absolute;
     top: -55px;
-    left: -12px;
-    width: 60px;
-    height: 34px;
+    left: 0;
+    width: 50px;
+    height: 50px;
     text-align: center;
     border: none; /* Mobile Safari */
   }
@@ -120,12 +120,26 @@
   .toggle-all:before {
     content: '❯';
     font-size: 22px;
+    line-height: 50px;
     color: #e6e6e6;
-    padding: 10px 27px 10px 27px;
   }
 
-  .toggle-all:checked:before {
+  .toggle-all.checked:before {
     color: #737373;
+  }
+
+  .toggle-all .checkbox-label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .toggle-all .checkbox {
+    position: absolute;
+    top: 0;
+    left: -9999px;
   }
 
   .todo-list {
@@ -134,55 +148,67 @@
     list-style: none;
   }
 
-  .todo-list li {
+  .todo-list .li {
     position: relative;
     font-size: 24px;
     border-bottom: 1px solid #ededed;
   }
 
-  .todo-list li:last-child {
+  .todo-list .li:last-child {
     border-bottom: none;
   }
 
-  .todo-list li.editing {
+  .todo-list .li.editing {
     border-bottom: none;
     padding: 0;
   }
 
-  .todo-list li.editing .edit {
+  .todo-list .li.editing .edit {
     display: block;
     width: 506px;
     padding: 12px 16px;
     margin: 0 0 0 43px;
   }
 
-  .todo-list li.editing .view {
+  .todo-list .li.editing .view {
     display: none;
   }
 
-  .todo-list li .toggle {
+  .todo-list .li .toggle {
     text-align: center;
     width: 40px;
-    /* auto, since non-WebKit browsers doesn't support input styling */
-    height: auto;
+    height:40px;
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto 0;
-    border: none; /* Mobile Safari */
-    -webkit-appearance: none;
-    appearance: none;
   }
+  .todo-list .li .checkbox-label {
+    width: 40px;
+    height:40px;
+    position: absolute;
+    top: 0;
+    left:0;
 
-  .todo-list li .toggle:after {
+  }
+  .todo-list .li .checkbox {
+    position: absolute;
+    top: 0;
+    left: -9999px;
+  }
+  .todo-list .li .icon {
+    width: 40px;
+    height:40px;
+  }
+  .todo-list .li .check:after {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
   }
 
-  .todo-list li .toggle:checked:after {
+  .todo-list .li .checked:after {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
   }
 
-  .todo-list li label {
+  .todo-list .li .label {
     word-break: break-all;
     padding: 15px 60px 15px 15px;
     margin-left: 45px;
@@ -191,43 +217,44 @@
     transition: color 0.4s;
   }
 
-  .todo-list li.completed label {
+  .todo-list .li.completed .label {
     color: #d9d9d9;
     text-decoration: line-through;
   }
 
-  .todo-list li .destroy {
+  .todo-list .li .destroy {
     display: none;
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
     bottom: 0;
     width: 40px;
     height: 40px;
-    margin: auto 0;
+    line-height: 40px;
+    margin: auto 0 11px;
     font-size: 30px;
     color: #cc9a9a;
-    margin-bottom: 11px;
+    border:none;
     transition: color 0.2s ease-out;
   }
 
-  .todo-list li .destroy:hover {
+  .todo-list .li .destroy:hover {
     color: #af5b5e;
   }
 
-  .todo-list li .destroy:after {
+  .todo-list .li .destroy:after {
     content: '×';
   }
 
-  .todo-list li:hover .destroy {
+  .todo-list .li:hover .destroy {
     display: block;
   }
 
-  .todo-list li .edit {
+  .todo-list .li .edit {
     display: none;
   }
 
-  .todo-list li.editing:last-child {
+  .todo-list .li.editing:last-child {
     margin-bottom: -1px;
   }
 
@@ -235,11 +262,10 @@
     color: #777;
     padding: 10px 15px;
     height: 20px;
-    text-align: center;
     border-top: 1px solid #e6e6e6;
   }
 
-  .footer:before {
+  .footer:after {
     content: '';
     position: absolute;
     right: 0;
@@ -257,18 +283,13 @@
   .todo-count {
     float: left;
     text-align: left;
-  }
-
-  .todo-count strong {
     font-weight: 300;
   }
 
+
   .filters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    right: 0;
-    left: 0;
+    font-size: 12px;
+    margin-left:100px;
   }
 
   .filters .li {
@@ -287,43 +308,24 @@
   .filters .li:hover {
     border-color: rgba(175, 47, 47, 0.1);
   }
-
-
-
-  .clear-completed,
-  html .clear-completed:active {
-    float: right;
-    position: relative;
-    line-height: 20px;
-    text-decoration: none;
-    cursor: pointer;
+  .filters .li.selected {
+    border-color: rgba(175, 47, 47, 0.2);
   }
 
-  .clear-completed:hover {
-    text-decoration: underline;
-  }
+
+
+
+
 
   .info {
     margin: 65px auto 0;
     color: #bfbfbf;
-    font-size: 10px;
+    font-size: 12px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     text-align: center;
   }
 
-  .info p {
-    line-height: 1;
-  }
 
-  .info a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 400;
-  }
-
-  .info a:hover {
-    text-decoration: underline;
-  }
 
   /*
       Hack to remove background from Mobile Safari.
@@ -347,71 +349,72 @@
     }
   }
 
-  @media (max-width: 430px) {
-    .footer {
-      height: 50px;
-    }
-
-    .filters {
-      bottom: 10px;
-    }
-  }
 </style>
 <template>
   <view class="container">
     <view class="todoapp">
       <view class="header">
         <view class="h1">todos</view>
-        <input class="new-todo"
-               focus
-               placeholder="What needs to be done?"
-               v-model="newTodo"
+        <input class="new-todo" value="{{newTodo}}"
+               auto-focus
+               placeholder="What needs to be done?"  @input="change"
                @blur="addTodo"/>
       </view>
-      <view class="main" v-show="todos.length" v-cloak>
-        <input class="toggle-all" type="checkbox" v-model="allDone"/>
+      <view class="main" wx:if="{{todos.length}}" v-cloak>
+        <checkbox-group @change="allChange({{allDone}})" class="toggle-all" :class="{checked:allDone}">
+          <label class="checkbox-label" >
+            <checkbox class="checkbox"  />
+          </label>
+        </checkbox-group>
         <view class="todo-list">
-          <!--<view v-for="todo in filteredTodos"-->
-                <!--class="li todo"-->
-                <!--:key="todo.id"-->
-                <!--:class="{ completed: todo.completed, editing: todo == editedTodo }">-->
-            <!--<view class="view">-->
-              <!--<input class="toggle" type="checkbox" v-model="todo.completed"/>-->
-              <!--<label @dblclick="editTodo(todo)">{{ todo.title }}</label>-->
-              <!--<button class="destroy" @click="removeTodo(todo)"></button>-->
-            <!--</view>-->
-            <!--<input class="edit" type="text"-->
-                   <!--v-model="todo.title"-->
-                   <!--v-todo-focus="todo == editedTodo"-->
-                   <!--@blur="doneEdit(todo)"-->
-                   <!--@keyup.enter="doneEdit(todo)"-->
-                   <!--@keyup.esc="cancelEdit(todo)"/>-->
-          <!--</view>-->
+          <repeat for="{{filteredTodos}}" key="id" index="id" item="todo">
+              <view class="li todo" :class="{ completed: todo.completed, editing: editedTodo && todo.id == editedTodo.id }">
+                <view class="view">
+                  <checkbox-group @change="checkboxChange({{todo}})" class="toggle">
+                    <label class="checkbox-label" >
+                      <checkbox class="checkbox" value="{{todo.title}}" checked="{{todo.completed}}"/>
+                    </label>
+                    <view class="icon">
+                      <view class="circle check" wx:if="{{!todo.completed}}"></view>
+                      <view class="circle checked"  wx:if="{{todo.completed}}"></view>
+                    </view>
+                  </checkbox-group>
+                  <view class="label" @longpress="editTodo({{todo}})">
+                    <view wx:if="{{ todo == editedTodo}}">editing</view>
+                    {{ todo.title }}
+                  </view>
+                  <view class="destroy" @tap="removeTodo({{todo}})"></view>
+                </view>
+                <input class="edit" type="text"
+                       value="{{beforeEditCache}}" @input="changeEdit"
+                       @blur="doneEdit({{todo}},{{beforeEditCache}})"/>
+              </view>
+          </repeat>
         </view>
       </view>
-      <view class="footer" v-show="todos.length" v-cloak>
+      <view class="footer"  wx:if="{{todos.length}}">
         <view class="todo-count">
-          <view>{{ remaining }}</view>
-          {{ remaining | pluralize }} left
+          {{ remaining }} {{ remaining  === 1 ? 'item' : 'items' }} left
         </view>
         <view class="filters">
-          <view class="li" href="#/all"  :class="{ selected: visibility == 'all' }">
+          <view class="li" @tap="changeVisibility(all)"  :class="{ selected: visibility == 'all' }">
             All
           </view>
-          <view class="li" :class="{ selected: visibility == 'active' }" href="#/active">
+          <view class="li" @tap="changeVisibility(active)"  :class="{ selected: visibility == 'active' }" >
             Active
           </view>
-          <view class="li" href="#/completed" :class="{ selected: visibility == 'completed' }">
+          <view class="li" @tap="changeVisibility(completed)" :class="{ selected: visibility == 'completed' }">
             Completed
           </view>
+          <view class="li" @tap="removeCompleted" wx:if="{{todos.length > remaining}}">
+            Clear
+          </view>
         </view>
-        <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
-          Clear completed
-        </button>
+
       </view>
     </view>
     <view class="info">
-      <view>Double-click to edit a todo</view>
+      <view>long-tap to edit a todo</view>
     </view>
   </view>
 </template>
@@ -422,7 +425,13 @@
   var STORAGE_KEY = 'todos-vuejs-2.0'
   var todoStorage = {
     fetch: function () {
-      var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+      let todos;
+      try {
+        todos = wx.getStorageSync(STORAGE_KEY)
+      } catch (e) {
+        // Do something when catch error
+      }
+      todos = todos||[];
       todos.forEach(function (todo, index) {
         todo.id = index
       })
@@ -430,7 +439,10 @@
       return todos
     },
     save: function (todos) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      try {
+        wx.setStorageSync(STORAGE_KEY,todos)
+      } catch (e) {
+      }
     }
   }
 
@@ -455,11 +467,12 @@
   export default class Index extends wepy.page {
 
     data = {
-      todos: todoStorage.fetch(),
+      todos:[],
       newTodo: '',
       editedTodo: null,
+      beforeEditCache: null,
       visibility: 'all'
-    }
+    };
 
     watch = {
       todos: {
@@ -479,20 +492,27 @@
       remaining: function () {
         return filters.active(this.todos).length
       },
-      allDone: {
-        get: function () {
-          return this.remaining === 0
-        },
-        set: function (value) {
-          this.todos.forEach(function (todo) {
-            todo.completed = value
-          })
-        }
-      }
+      allDone:function () {
+        return this.remaining === 0
+      },
+//      allDone: {
+//        get: function () {
+//          console.warn('allDone')
+//          return this.remaining === 0
+//        },
+//        set: function (value) {
+//          console.warn('allDone',value)
+//          this.todos.forEach(function (todo) {
+//            todo.completed = value
+//          })
+//        }
+//      }
     }
 
     filters = {
       pluralize: function (n) {
+        console.warn('pluralize',n)
+
         return n === 1 ? 'item' : 'items'
       }
     }
@@ -500,8 +520,20 @@
     // methods that implement data logic.
     // note there's no DOM manipulation here at all.
     methods = {
+      allChange(allDone){
+        this.todos =  this.todos.map((item)=>({...item,completed:!allDone}))
+
+      },
+      changeVisibility(visibility){
+        this.visibility = visibility
+      },
+      checkboxChange:(todo)=>{
+        this.todos = this.todos.map((item)=>item.id==todo.id?{...todo,completed:!todo.completed}:item)
+      },
+      change:(e)=>{
+        this.newTodo = e.detail.value;
+      },
       addTodo:()=>{
-        console.warn('addTodo')
         var value = this.newTodo && this.newTodo.trim()
         if (!value) {
           return
@@ -515,40 +547,51 @@
       },
 
       removeTodo (todo) {
-        this.todos.splice(this.todos.indexOf(todo), 1)
+        this.remove(todo)
       },
 
       editTodo (todo) {
+        console.warn('editTodo',todo)
         this.beforeEditCache = todo.title
         this.editedTodo = todo
       },
 
-      doneEdit (todo) {
+      doneEdit (todo,title) {
         if (!this.editedTodo) {
           return
         }
         this.editedTodo = null
-        todo.title = todo.title.trim()
-        if (!todo.title) {
-          this.removeTodo(todo)
+        title = title.trim()
+        if (!title) {
+          this.remove(todo)
         }
+        else {
+          this.todos =  this.todos.map((item)=>item.id==todo.id?{...todo,title}:item)
+        }
+        this.beforeEditCache = null
       },
-
+      changeEdit(e){
+        this.beforeEditCache = e.detail.value;
+      },
       cancelEdit (todo) {
         this.editedTodo = null
         todo.title = this.beforeEditCache
       },
 
       removeCompleted  () {
+        console.warn('removeCompleted',filters.active(this.todos))
         this.todos = filters.active(this.todos)
       }
     }
-
+    remove (todo) {
+      this.todos =  this.todos.filter((item)=>item.id!=todo.id)
+    }
     onLoad() {
 
       let self = this;
 
-      console.warn('this', this)
+      this.todos = todoStorage.fetch()
+      console.warn('todos', this.todos)
 
     }
   }
